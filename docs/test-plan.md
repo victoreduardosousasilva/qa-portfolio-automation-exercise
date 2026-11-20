@@ -6,13 +6,13 @@
 | **URL do Ambiente** | https://automationexercise.com/ |
 | **Autor (QA)** | Victor Eduardo Sousa Silva |
 | **Versão** | 1.0 |
-| **Status** | Em Elaboração |
+| **Status** | Aprovado |
 
 ---
 
 ## 1. Objetivo e Visão Geral
 
-Validar a funcionalidade, usabilidade, navegação, validações e permissões de acesso das aplicações automationexercise. Desta forma garantimos a cobertura de teste do fluxo principal do sistema, que vai do usuario fazer login/registro no site, selecionar o produto, até a fase final da compra/chekout.
+Validar a funcionalidade, usabilidade, navegação, validações e permissões de acesso das aplicações automationexercise. Desta forma garantimos a cobertura de teste do fluxo principal do sistema, que vai do usuario fazer login/registro no site, selecionar o produto, até a fase final da compra/checkout.
 
 ---
 
@@ -21,7 +21,7 @@ Validar a funcionalidade, usabilidade, navegação, validações e permissões d
 ### 2.1. Dentro do Escopo (In-Scope)
 
 * **Módulo de Autenticação e Cadastro:** criação de conta, login válido/inválido, exclusão de conta
-* **Módulo de Produtos:** Selecão de itens para o carrinho, quantidade de itens, preços corretos
+* **Módulo de Produtos:** Seleção de itens para o carrinho, quantidade de itens, preços corretos
 * **Módulo de Checkout:** Carrinho, soma dos produtos, finalização da compra
 
 ### 2.2. Fora do Escopo (Out-of-Scope)
@@ -41,7 +41,7 @@ Validar a funcionalidade, usabilidade, navegação, validações e permissões d
 * **Testes API:** Será aplicado usando a ferramenta Postman
 * **Testes de autenticação:** Será aplicado atraves de validacoes de dados
 * **Cenários positivos e negativos:** Sera aplicado para validar o comportamento do sistema
-* **Integração entre funcionalidades da aplicação, quando aplicável:** Nao sei responder
+* **Integração entre funcionalidades da aplicação, quando aplicável:** itens adicionados no catálogo refletindo valores corretos no carrinho e no resumo do checkout
 
 
 ### 3.2. Ambiente e Matriz de Compatibilidade
@@ -75,6 +75,7 @@ Validar a funcionalidade, usabilidade, navegação, validações e permissões d
 * 100% dos casos de teste críticos executados
 * Taxa de aprovação mínima de 80% nos fluxos secundários
 * Todos os defeitos encontrados devidamente reportados no Jira com evidências.
+* 0 bugs de severidade Blocker ou Crítica abertos
 
 ---
 
