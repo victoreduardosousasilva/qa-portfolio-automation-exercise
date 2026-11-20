@@ -20,9 +20,9 @@ Validar a funcionalidade, usabilidade, navegação, validações e permissões d
 
 ### 2.1. Dentro do Escopo (In-Scope)
 
-* **[Módulo 1]:** Cadastro e Login do usuário
-* **[Módulo 2]:** Selecão de itens para o carrinho
-* **[Módulo 3]:** Carrinho e Checkout até a finalização da compra
+* **Módulo de Autenticação e Cadastro:** criação de conta, login válido/inválido, exclusão de conta
+* **Módulo de Produtos:** Selecão de itens para o carrinho, quantidade de itens, preços corretos
+* **Módulo de Checkout:** Carrinho, soma dos produtos, finalização da compra
 
 ### 2.2. Fora do Escopo (Out-of-Scope)
 
@@ -45,10 +45,10 @@ Validar a funcionalidade, usabilidade, navegação, validações e permissões d
 
 
 ### 3.2. Ambiente e Matriz de Compatibilidade
-[Especifique em qual sistema operacional, navegadores e ferramentas os testes serão executados.]
+
 * **Sistema Operacional:** Windows 11
 * **Navegadores:** Google Chrome (versão atual)
-* **Ferramentas de Apoio:** Jira, TestRail, Postman, Playwright, IA
+* **Ferramentas de Apoio:** Jira, TestRail, Postman, Playwright, Git/GitHub, VScode
 
 ---
 
@@ -57,21 +57,25 @@ Validar a funcionalidade, usabilidade, navegação, validações e permissões d
 
 | ID | Risco Identificado | Probabilidade | Impacto | Plano de Mitigação / Contingência |
 | :--- | :--- | :---: | :---: | :--- |
-| **R-01** | Validacao de dados nos campos de cadastro | Alta | Alto | Nao sei responder |
-| **R-02** | [Descreva o risco 2] | [Alta/Média/Baixa] | [Alto/Médio/Baixo] | [Ação para evitar ou contornar] |
-| **R-03** | [Descreva o risco 3] | [Alta/Média/Baixa] | [Alto/Médio/Baixo] | [Ação para evitar ou contornar] |
+| **R-01** | Instabilidade ou lentidão do ambiente público | Alta | Alto | Executar testes automatizados fora dos horários de pico e implementar esperas explícitas (auto-waiting) no Playwright. |
+| **R-02** | Duplicidade de dados | Média | Alto | Gerar e-mails dinâmicos com timestamp ou bibliotecas como Faker (ex: victor.qa+20261120@teste.com) e excluir a conta ao final do fluxo. |
+| **R-03** | Pop-ups de anúncios invalidando cliques na tela | Alta | Baixo | Documentar como comportamento externo conhecido e configurar bloqueio/tratamento de rotas de anúncios na automação. |
 
 ---
 
 ## 5. Critérios de Entrada e Saída (Entry & Exit Criteria)
 
 ### 5.1. Critérios de Entrada (Para iniciar os testes)
-* [Condição 1 que deve estar satisfeita antes da execução]
-* [Condição 2]
+* Plano de Testes aprovado
+* Ambiente automationexercise.com acessível (HTTP 200)
+* Ferramentas configuradas
+* Casos de teste modelados e revisados no TestRail
+
 
 ### 5.2. Critérios de Saída (Para aprovar a entrega)
-* [Condição mínima de aprovação, métricas de execução e limite de bugs abertos]
-* [Condição 2]
+* 100% dos casos de teste críticos executados
+* Taxa de aprovação mínima de 80% nos fluxos secundários
+* Todos os defeitos encontrados devidamente reportados no Jira com evidências.
 
 ---
 
