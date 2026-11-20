@@ -53,7 +53,6 @@ Validar a funcionalidade, usabilidade, navegação, validações e permissões d
 ---
 
 ## 4. Análise de Riscos e Plano de Mitigação
-[Identifique pelo menos 3 riscos técnicos ou de negócio que podem impactar a qualidade ou o cronograma, classificando a probabilidade/impacto e definindo uma ação preventiva.]
 
 | ID | Risco Identificado | Probabilidade | Impacto | Plano de Mitigação / Contingência |
 | :--- | :--- | :---: | :---: | :--- |
