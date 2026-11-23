@@ -1,0 +1,161 @@
+{
+  "info": {
+    "_postman_id": "3ed178ff-314e-48f3-8867-adfb1757fb0c",
+    "name": "Automation Exercise - API Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58221042",
+    "_collection_link": "https://go.postman.co/collection/58221042-3ed178ff-314e-48f3-8867-adfb1757fb0c?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Listar todos os produtos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Valida o Status Code HTTP da resposta\r\npm.test(\"Status code is 200\", function () {\r\n  pm.response.to.have.status(200);\r\n});\r\n\r\n// 2. Valida o tempo de resposta (SLA básico de performance)\r\npm.test(\"Response time is less than 2000ms\", function () {\r\n  pm.expect(pm.response.responseTime).to.be.below(2000);\r\n});\r\n\r\n// 3. Converte o corpo da resposta para JSON e valida o contrato/regras\r\nconst jsonData = pm.response.json();\r\n\r\npm.test(\"Contrato JSON deve conter 'responseCode' e lista de produtos\", function () {\r\n    pm.expect(jsonData).to.have.property(\"responseCode\", 200);\r\n    pm.expect(jsonData).to.have.property(\"products\");\r\n    pm.expect(jsonData.products).to.be.an(\"array\").that.is.not.empty;\r\n});\r\n\r\n// 4. Valida os atributos do primeiro item retornado\r\npm.test(\"Primeiro produto deve conter id, name e price\", function () {\r\n    const firstProduct = jsonData.products[0];\r\n    pm.expect(firstProduct).to.have.all.keys(\"id\", \"name\", \"price\", \"brand\", \"category\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/productsList",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productsList"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Validar método não permitido",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Valida que o servidor respondeu à requisição HTTP\r\npm.test(\"Status Code HTTP deve ser 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\n// 2. Valida o contrato e o código de erro interno da API (405 Method Not Allowed)\r\nconst jsonData = pm.response.json();\r\n\r\npm.test(\"Corpo JSON deve retornar responseCode 405\", function () {\r\n    pm.expect(jsonData).to.have.property(\"responseCode\", 405);\r\n});\r\n\r\npm.test(\"Mensagem de erro deve informar que o método não é suportado\", function () {\r\n    pm.expect(jsonData).to.have.property(\"message\", \"This request method is not supported.\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/productsList",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productsList"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Validar busca de produto via API",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Valida o Status Code HTTP\r\npm.test(\"Status Code HTTP deve ser 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\nconst jsonData = pm.response.json();\r\n\r\n// 2. Valida o código de sucesso interno e se a lista de produtos não veio vazia\r\npm.test(\"Deve retornar responseCode 200 e lista de produtos encontrada\", function () {\r\n    pm.expect(jsonData).to.have.property(\"responseCode\", 200);\r\n    pm.expect(jsonData.products).to.be.an(\"array\").that.is.not.empty;\r\n});\r\n\r\n// 3. Valida regra de negócio: os produtos retornados correspondem ao termo buscado (\"top\")\r\npm.test(\"Resultados devem conter o termo buscado no nome ou categoria\", function () {\r\n    const firstProduct = jsonData.products[0];\r\n    const matchName = firstProduct.name.toLowerCase().includes(\"top\");\r\n    const matchCategory = firstProduct.category.category.toLowerCase().includes(\"top\");\r\n    \r\n    pm.expect(matchName || matchCategory).to.be.true;\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "search_product",
+              "value": "top",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/searchProduct",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "searchProduct"
+          ],
+          "query": [
+            {
+              "key": "search_product",
+              "value": "top",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Validar resposta de usuário não encontrado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Valida que o servidor respondeu à requisição HTTP\r\npm.test(\"Status Code HTTP deve ser 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\nconst jsonData = pm.response.json();\r\n\r\n// 2. Valida o código de negócio 404 (Usuário não encontrado)\r\npm.test(\"Corpo JSON deve retornar responseCode 404\", function () {\r\n    pm.expect(jsonData).to.have.property(\"responseCode\", 404);\r\n});\r\n\r\n// 3. Valida a mensagem exata de falha de autenticação\r\npm.test(\"Mensagem deve informar 'User not found!'\", function () {\r\n    pm.expect(jsonData).to.have.property(\"message\", \"User not found!\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "usuario.inexistente.qa@teste.com",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "SenhaErrada123",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/verifyLogin",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "verifyLogin"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    }
+  ]
+}
