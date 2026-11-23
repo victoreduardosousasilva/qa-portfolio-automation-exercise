@@ -13,15 +13,15 @@
 
 | ID Bug | Jira Key | Caso de Teste | Título Resumido | Severidade | Prioridade | Status |
 | :--- | :---: | :---: | :--- | :---: | :---: | :---: |
-| **BUG-01** | `QPAE-1` | `CT-02` | Sistema permitiu formato de email inválido | Critical | Alta | Aberto |
-| **BUG-02** | `QPAE-2` | `CT-07` | Sistema permite inserir valores negativos para produtos selecionados | Critical | Alta | Aberto |
-| **BUG-03** | `QPAE-3` | `CT-08` | Sistema permite inserir uma quantidade acima do limite permitido | Critical | Alta | Aberto |
+| **BUG-01** | `QPAE-1` | `CT-02` | Sistema permitiu formato de email inválido | Alta | Alta | Aberto |
+| **BUG-02** | `QPAE-2` | `CT-07` | Sistema permite inserir valores negativos para produtos selecionados | Alta | Alta | Aberto |
+| **BUG-03** | `QPAE-3` | `CT-08` | Sistema permite inserir uma quantidade acima do limite permitido | Alta | Alta | Aberto |
 
 ---
 
 ## Detalhamento dos Defeitos
 
-### BUG-01 | [Exemplo] [Autenticação] Sistema permitiu formato de email inválido
+### BUG-01 | [Autenticação] Sistema permitiu formato de email inválido
 
 * **Jira Issue:** `QPAE-1`
 * **Caso de Teste Relacionado:** `CT-02`
@@ -31,10 +31,10 @@
 * **Ambiente:** Windows 11 | Google Chrome atual | `https://automationexercise.com/`
 
 #### Descrição
-Ao digitar um endereço de e-mail inválido no campo de inscrição da Newsletter e clicar no botão Signup, o sistema avança para a próxima etapa do cadastro
+Ao digitar um endereço de e-mail inválido no campo de inscrição e clicar no botão Signup, o sistema avança para a próxima etapa do cadastro
 
 #### Passos para Reproduzir (Steps to Reproduce)
-1. Acessar a página inicial `https://automationexercise.com/`.
+1. Acessar a página inicial `https://automationexercise.com/login`.
 2. Informar um nome válido na seção New User Signup!
 3. Inserir um e-mail inválido (`teste@com`) no campo `Your email address`.
 4. Clicar em Signup.
@@ -47,13 +47,11 @@ o sistema avança para a próxima etapa do cadastro
 Sistema deve impedir o avanço do cadastro enquanto o endereço de e-mail estiver em formato inválido.
 
 #### Evidência
-![Evidência BUG-01](evidences/bug-01-formato-email-invalido.png)s
+![Evidência BUG-01](evidences/bug-01-formato-email-invalido.png)
 
 ---
 
-## Detalhamento dos Defeitos
-
-### BUG-02 | [Exemplo] [Produtos] Sistema permite inserir valores negativos para produtos selecionados
+### BUG-02 | [Produtos] Sistema permite inserir valores negativos para produtos selecionados
 
 * **Jira Issue:** `QPAE-2`
 * **Caso de Teste Relacionado:** `CT-07`
@@ -79,13 +77,11 @@ O produto é adicionado ao carrinho com um valor negativo inserido
 Sistema não deve permitir a inclusão de produtos com quantidades negativas no carrinho.
 
 #### Evidência
-![Evidência BUG-02](evidences/bug-02-quantidade-produto-negativa.png)s
+![Evidência BUG-02](evidences/bug-02-quantidade-produto-negativa.png)
 
 ---
 
-## Detalhamento dos Defeitos
-
-### BUG-03 | [Exemplo] [Produtos] Sistema permite inserir uma quantidade acima do limite permitido
+### BUG-03 | [Produtos] Sistema permite inserir uma quantidade acima do limite permitido
 
 * **Jira Issue:** `QPAE-3`
 * **Caso de Teste Relacionado:** `CT-08`
@@ -112,4 +108,4 @@ O produto é adicionado ao carrinho com um valor acima do permitido
 Sistema deve respeitar o limite máximo de quantidade estabelecido para o produto.
 
 #### Evidência
-![Evidência BUG-03](evidences/bug-03-quantidade-produto-indisponivel-mil.png)s
+![Evidência BUG-03](evidences/bug-03-quantidade-produto-indisponivel-mil.png)
